@@ -1,0 +1,14 @@
+#!/bin/sh
+
+MP3_FILE=$1
+TITLE=$2
+ARTIST=$3
+ALBUM=$4
+YEAR=$5
+
+ffmpeg -i "$MP3_FILE" -c copy \
+	-metadata title="$TITLE" \
+	-metadata artist="$ARTIST" \
+	-metadata album="$ALBUM" \
+	-metadata date="$YEAR" \
+	"ann_$MP3_FILE"

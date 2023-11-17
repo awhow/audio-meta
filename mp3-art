@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SRC_FILE="$1"
+ART_FILE="$2"
+
+ffmpeg -i "$SRC_FILE" -i "$ART_FILE" \
+	-map 0:0 -map 1:0 -codec copy -id3v2_version 3 \
+	-metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "ann_$SRC_FILE"

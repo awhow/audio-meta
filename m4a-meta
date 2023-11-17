@@ -1,0 +1,20 @@
+#!/bin/bash
+
+M4A_FILE=$1
+TITLE=$2
+AUTHOR=$3
+YEAR=$4
+
+
+INFOFILE=$(mktemp)
+rm $INFOFILE
+
+ffmpeg -i "$M4A_FILE" -f ffmetadata "$INFOFILE"
+echo $INFOFILE
+
+echo "title=$TITLE" >> "$INFOFILE"
+echo "artist=$AUTHOR" >> "$INFOFILE"
+echo "date=$YEAR" >> "$INFOFILE"
+
+ffmpeg -i "$M4A_FILE" -i "$INFOFILE" -map_metadata 1 -codec copy -f mp4 "ann_$M4A_FILE"
+echo $INFOFILE

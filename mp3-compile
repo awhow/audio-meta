@@ -1,0 +1,15 @@
+#!/bin/sh
+
+FILELIST=fl.txt
+# $(mktemp)
+
+echo $FILELIST
+
+for file in "$@"; do
+	echo "file '$PWD/$file'" >> $FILELIST
+done
+
+ffmpeg -f concat -safe 0 -i $FILELIST -vn output.mp3
+
+
+rm $FILELIST

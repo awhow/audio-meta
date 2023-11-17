@@ -1,0 +1,14 @@
+#!/bin/sh
+
+FILELIST=$(mktemp)
+rm $FILELIST
+
+echo $FILELIST
+
+for file in "$@"; do
+	echo "file '$PWD/$file'" >> $FILELIST
+done
+
+ffmpeg -f concat -safe 0 -i $FILELIST -vn -c:a aac -f mp4 output.m4a
+
+rm $FILELIST
