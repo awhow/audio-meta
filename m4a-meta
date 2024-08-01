@@ -15,6 +15,7 @@ echo $INFOFILE
 echo "title=$TITLE" >> "$INFOFILE"
 echo "artist=$AUTHOR" >> "$INFOFILE"
 echo "date=$YEAR" >> "$INFOFILE"
+echo "album=$TITLE" >> "$INFOFILE"
 
 ffmpeg -i "$M4A_FILE" -i "$INFOFILE" -map_metadata 1 -codec copy -f mp4 "ann_$M4A_FILE"
 echo $INFOFILE
